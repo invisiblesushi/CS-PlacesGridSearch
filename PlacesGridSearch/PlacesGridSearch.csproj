@@ -6,6 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
+        <AssemblyName>PlacesGridSearch</AssemblyName>
+        <RootNamespace>PlacesGridSearch</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

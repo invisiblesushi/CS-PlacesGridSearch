@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using Newtonsoft.Json;
-using RestaurantNotifier.Model;
+using PlacesGridSearch.Model;
 
-namespace RestaurantNotifier.Service;
+namespace PlacesGridSearch.Service;
 
 public class GooglePlacesApiWrapper
 {
@@ -30,9 +30,9 @@ public class GooglePlacesApiWrapper
         var json = FetchResult(url).Result;
 
         var result = JsonConvert.DeserializeObject<GooglePlacesResult>(json);
-        places.AddRange(result.results);
+        places.AddRange(result?.results!);
 
-        while (result.next_page_token != null)
+        while (result!.next_page_token != null)
         {
             var oldToken = result.next_page_token;
             Thread.Sleep(100);
@@ -42,14 +42,13 @@ public class GooglePlacesApiWrapper
             result = JsonConvert.DeserializeObject<GooglePlacesResult>(json);
 
             // Force retry on invalid request.
-            if (result.status == "INVALID_REQUEST")
+            if (result?.status == "INVALID_REQUEST")
             {
                 result.next_page_token = oldToken;
-                //Console.WriteLine($"INVALID_REQUEST url:{nextPageUrl}");
                 Thread.Sleep(1000);
             }
             
-            places.AddRange(result.results);
+            places.AddRange(result?.results!);
         }
 
         Console.WriteLine($"Request returned {places.Count} results");
@@ -61,17 +60,14 @@ public class GooglePlacesApiWrapper
 
     private async Task<string> FetchResult(string url)
     {
-        HttpResponseMessage response = null;
+        var response = await _httpClient!.GetAsync(url);
         
-        response = await _httpClient!.GetAsync(url);
         _requestNumber += 1;
         Console.WriteLine($"Request number: {_requestNumber}");
         
         if (!response.IsSuccessStatusCode)
-        {
             throw new ApplicationException("Request failed");
-        }
-        
-        return await response!.Content.ReadAsStringAsync();
+
+        return await response.Content.ReadAsStringAsync();
     }
 }

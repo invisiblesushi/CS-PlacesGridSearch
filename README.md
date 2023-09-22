@@ -1,1 +1,1 @@
-# Restaurant-notifier-service
+# PlacesGridSearch

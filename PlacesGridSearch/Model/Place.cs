@@ -1,4 +1,4 @@
-﻿namespace RestaurantNotifier.Model;
+﻿namespace PlacesGridSearch.Model;
 
 public class Place
 {

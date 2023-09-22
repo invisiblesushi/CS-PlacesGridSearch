@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantNotifier", "RestaurantNotifier\RestaurantNotifier.csproj", "{F5DF1021-7DEF-4765-B286-E2DA28FFAF33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlacesGridSearch", "PlacesGridSearch\PlacesGridSearch.csproj", "{F5DF1021-7DEF-4765-B286-E2DA28FFAF33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
